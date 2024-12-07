@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home - Zabansara
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section text-center py-5" style="background-color: #004d99; color: #fff;">
+    <h1 class="display-4">Welcome to Zabansara Rey</h1>
+    <p class="lead">Leading English Language Courses in Your City</p>
+    <a href="#" class="btn btn-warning btn-lg mt-4">Join Us</a>
+</div>
+
+<!-- About Us Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>About Us</h2>
+            <p>At Zabansara Rey, we provide top-notch English language learning experiences for all age groups. Join us to enhance your English skills with our expert tutors.</p>
+        </div>
+        <div class="col-md-6">
+            <!-- Uncomment and use if you have an image -->
+{#            <!-- <img src="{% static 'images/about.jpg' %}" class="img-fluid rounded" alt="About Us"> -->#}
+        </div>
+    </div>
+</div>
+
+<!-- Services Section -->
+<div class="services-section py-5" style="background-color: #e0f7fa;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Course One</h3>
+                        <p class="card-text">Beginner-level English courses for students who want to get started.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Course Two</h3>
+                        <p class="card-text">Intermediate English courses aimed at improving fluency and accuracy.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Course Three</h3>
+                        <p class="card-text">Advanced courses for students looking to master English and specialize in various areas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
