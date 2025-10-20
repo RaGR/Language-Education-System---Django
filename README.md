@@ -47,7 +47,7 @@ Originally created for **Zabansara Language Academy**, this project represents a
    ```bash
    git clone https://github.com/RaGR/Language-Education-System---Django.git
    cd Language-Education-System---Django
-````
+``
 
 2. **Create and Activate Virtual Environment**
 
