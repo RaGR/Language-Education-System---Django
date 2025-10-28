@@ -21,6 +21,13 @@ class Course(models.Model):
         null=True,
         blank=True,
     )
+    created_by = models.ForeignKey(
+        "Teacher",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="courses_created",
+    )
 
     def __str__(self) -> str:
         return self.name
@@ -34,6 +41,13 @@ class Student(models.Model):
         ("other", "Other"),
     ]
 
+    user = models.OneToOneField(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="student_profile",
+        null=True,
+        blank=True,
+    )
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     age = models.PositiveIntegerField()
@@ -49,6 +63,16 @@ class Student(models.Model):
 
 class Teacher(User):
     """Teacher profile extending Django's built-in User."""
+    GENDER_CHOICES = [
+        ("male", "Male"),
+        ("female", "Female"),
+        ("other", "Other"),
+    ]
+
+    age = models.PositiveIntegerField(null=True, blank=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True)
+    gpa = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
     subjects = models.ManyToManyField(Subject, related_name="teachers", blank=True)
     assigned_students = models.ManyToManyField(
         Student,

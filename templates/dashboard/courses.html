@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start mb-4">
+        <div>
+            <h2 class="mb-1">دوره‌ها</h2>
+            <p class="text-muted mb-0">دوره‌های طراحی شده توسط شما و امکان افزودن دوره جدید.</p>
+        </div>
+        <a href="{% url 'dashboard:teacher_dashboard' %}" class="btn btn-outline-secondary mt-3 mt-lg-0">بازگشت به داشبورد</a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <span>دوره‌های من</span>
+                    <span class="badge bg-light text-dark">{{ courses|length }}</span>
+                </div>
+                <div class="card-body">
+                    {% if courses %}
+                        <div class="table-responsive">
+                            <table class="table table-striped align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>عنوان</th>
+                                        <th>موضوع</th>
+                                        <th>توضیحات</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for course in courses %}
+                                        <tr>
+                                            <td>{{ course.name }}</td>
+                                            <td>{{ course.subject|default:'-' }}</td>
+                                            <td class="text-muted">{{ course.description|default:'-' }}</td>
+                                            <td class="text-end">
+                                                <div class="btn-group btn-group-sm">
+                                                    <a class="btn btn-outline-primary" href="{% url 'dashboard:course_edit' course.pk %}">ویرایش</a>
+                                                    <a class="btn btn-outline-danger" href="{% url 'dashboard:course_delete' course.pk %}">حذف</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">هنوز دوره‌ای ایجاد نکرده‌اید.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white">افزودن دوره جدید</div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            {% for field in form %}
+                                <div class="col-12">
+                                    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <div class="form-text">{{ field.help_text }}</div>
+                                    {% endif %}
+                                    {% for error in field.errors %}
+                                        <div class="text-danger small mt-1">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger mt-3">
+                                {% for error in form.non_field_errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <button type="submit" class="btn btn-success w-100 mt-4">ثبت دوره</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

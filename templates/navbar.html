@@ -1,3 +1,4 @@
+{% load dashboard_extras %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">Zaban Sara</a>
@@ -10,20 +11,33 @@
           <li class="nav-item">
               <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
+          {% if user|is_teacher %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard' %}">Dash Board</a>
+            <a class="nav-link" href="{% url 'dashboard:teacher_dashboard' %}">Teacher Dashboard</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard:courses' %}">Courses</a>
+          </li>
+          {% endif %}
+          {% if user|is_student %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard:student_dashboard' %}">Student Dashboard</a>
+          </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
-          
+
 
         {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Register</a>
+            <a class="nav-link" href="{% url 'register' %}">Student Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard:teacher_signup' %}">Teacher Sign Up</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'login' %}">Login</a>

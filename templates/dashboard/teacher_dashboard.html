@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/irantyper/iran-yekan-font@1.0.1/dist/fontiran.css">
+    <style>
+        body {
+            font-family: 'Iran Yekan', sans-serif;
+            direction: rtl;
+            text-align: right;
+            background-color: #f8f9fa;
+        }
+
+        .dashboard-header {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .dashboard-card {
+            flex: 1 1 30%;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-footer {
+            position: relative;
+            height: 200px;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .dashboard-footer::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: radial-gradient(circle at center, #007bff, transparent);
+            border-radius: 50%;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="dashboard-header">پنل مدیریت معلم</h2>
+    <div class="dashboard-card-container">
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <h5 class="card-title">مدیریت دانش‌آموزان <i class="fas fa-user-graduate"></i></h5>
+                <p class="card-text">مشاهده و مدیریت اطلاعات دانش‌آموزان، و اختصاص به دوره‌ها.</p>
+                <a href="{% url 'dashboard:student_management' %}" class="btn btn-primary">مدیریت دانش‌آموزان</a>
+            </div>
+        </div>
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <h5 class="card-title">ساخت آزمون <i class="fas fa-pen"></i></h5>
+                <p class="card-text">تعریف آزمون‌های جدید و اختصاص آن‌ها به دوره‌ها و دانش‌آموزان.</p>
+                <a href="{% url 'dashboard:exams' %}" class="btn btn-primary">مدیریت آزمون‌ها</a>
+            </div>
+        </div>
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <h5 class="card-title">افزودن تکالیف <i class="fas fa-book"></i></h5>
+                <p class="card-text">ایجاد تکالیف جدید و تنظیم مهلت تحویل برای دانش‌آموزان.</p>
+                <a href="{% url 'dashboard:assignments' %}" class="btn btn-primary">مدیریت تکالیف</a>
+            </div>
+        </div>
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <h5 class="card-title">طراحی دوره‌ها <i class="fas fa-layer-group"></i></h5>
+                <p class="card-text">ایجاد و ویرایش دوره‌های آموزشی و تعیین موضوع هر دوره.</p>
+                <a href="{% url 'dashboard:courses' %}" class="btn btn-primary">مدیریت دوره‌ها</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">آخرین آزمون‌ها</div>
+                <div class="card-body">
+                    {% if exams %}
+                        <ul class="list-group list-group-flush">
+                            {% for exam in exams %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ exam.title }} - {{ exam.date }}
+                                    <span class="badge bg-secondary">{{ exam.course }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted mb-0">هیچ آزمون فعالی ثبت نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">آخرین تکالیف</div>
+                <div class="card-body">
+                    {% if assignments %}
+                        <ul class="list-group list-group-flush">
+                            {% for assignment in assignments %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ assignment.title }} - {{ assignment.due_date }}
+                                    <span class="badge bg-secondary">{{ assignment.course }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted mb-0">هیچ تکلیفی ثبت نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-secondary text-white">دانش‌آموزان من</div>
+                <div class="card-body">
+                    {% if students_managed %}
+                        <ul class="list-group list-group-flush">
+                            {% for student in students_managed %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>{{ student.first_name }} {{ student.last_name }}</span>
+                                    <span class="badge bg-light text-dark">{{ student.email }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted mb-0">دانش‌آموزی به شما اختصاص داده نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">برنامه کلاس‌ها</div>
+                <div class="card-body">
+                    {% if schedules %}
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>دوره</th>
+                                        <th>روز</th>
+                                        <th>شروع</th>
+                                        <th>پایان</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for schedule in schedules %}
+                                        <tr>
+                                            <td>{{ schedule.course }}</td>
+                                            <td>{{ schedule.get_day_display }}</td>
+                                            <td>{{ schedule.start_time }}</td>
+                                            <td>{{ schedule.end_time }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">هیچ کلاسی برنامه‌ریزی نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-footer mt-5"></div>
+{% endblock %}

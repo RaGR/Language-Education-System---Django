@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Exams{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start mb-4">
+        <div>
+            <h2 class="mb-1">آزمون‌ها</h2>
+            <p class="text-muted mb-0">مرور آزمون‌های آینده و گذشته و ثبت آزمون‌های جدید.</p>
+        </div>
+        <a href="{% url 'dashboard:teacher_dashboard' %}" class="btn btn-outline-secondary mt-3 mt-lg-0">بازگشت به داشبورد</a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <span>آزمون‌های پیش رو</span>
+                    <span class="badge bg-light text-dark">{{ upcoming_exams|length }}</span>
+                </div>
+                <div class="card-body">
+                    {% if upcoming_exams %}
+                        <div class="table-responsive">
+                            <table class="table table-striped align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>عنوان</th>
+                                        <th>دوره</th>
+                                        <th>تاریخ</th>
+                                        <th>دانش‌آموزان</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for exam in upcoming_exams %}
+                                        <tr>
+                                            <td>{{ exam.title }}</td>
+                                            <td>{{ exam.course }}</td>
+                                            <td>{{ exam.date }}</td>
+                                            <td>
+                                                {% for student in exam.students.all %}
+                                                    <span class="badge bg-secondary">{{ student.first_name }} {{ student.last_name }}</span>
+                                                {% empty %}
+                                                    <span class="text-muted">هیچ‌کس</span>
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">آزمون آتی ثبت نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-light">
+                    <strong>آزمون‌های گذشته</strong>
+                </div>
+                <div class="card-body">
+                    {% if past_exams %}
+                        <div class="table-responsive">
+                            <table class="table table-striped align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>عنوان</th>
+                                        <th>دوره</th>
+                                        <th>تاریخ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for exam in past_exams %}
+                                        <tr>
+                                            <td>{{ exam.title }}</td>
+                                            <td>{{ exam.course }}</td>
+                                            <td>{{ exam.date }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">آزمون قبلی ثبت نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white">ثبت آزمون جدید</div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            {% for field in form %}
+                                <div class="col-12">
+                                    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {% if field.name == 'students' %}
+                                        <div class="p-3 border rounded overflow-auto" style="max-height: 220px;">
+                                            {% for checkbox in field %}
+                                                <div class="form-check">
+                                                    {{ checkbox.tag }}
+                                                    <label class="form-check-label">{{ checkbox.choice_label }}</label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ field }}
+                                    {% endif %}
+                                    {% if field.help_text %}
+                                        <div class="form-text">{{ field.help_text }}</div>
+                                    {% endif %}
+                                    {% for error in field.errors %}
+                                        <div class="text-danger small mt-1">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger mt-3">
+                                {% for error in form.non_field_errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <button type="submit" class="btn btn-success w-100 mt-4">ثبت آزمون</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

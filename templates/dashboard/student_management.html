@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Student Management{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>مدیریت دانش‌آموزان</h2>
+        <a class="btn btn-outline-primary" href="{% url 'dashboard:teacher_dashboard' %}">بازگشت به داشبورد</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>نام</th>
+                    <th>سن</th>
+                    <th>ایمیل</th>
+                    <th>معدل</th>
+                    <th>دوره‌ها</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.first_name }} {{ student.last_name }}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.gpa }}</td>
+                        <td>
+                            {% for course in student.courses.all %}
+                                <span class="badge bg-secondary">{{ course.name }}</span>
+                            {% empty %}
+                                <span class="text-muted">هیچ دوره‌ای اختصاص داده نشده است</span>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" href="{% url 'dashboard:edit_student' student.pk %}">ویرایش</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">هیچ دانش‌آموزی ثبت نشده است.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

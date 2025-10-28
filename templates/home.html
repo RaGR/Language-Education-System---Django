@@ -6,56 +6,78 @@ Home - Zabansara
 {% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<div class="hero-section text-center py-5" style="background-color: #004d99; color: #fff;">
-    <h1 class="display-4">Welcome to Zabansara Rey</h1>
-    <p class="lead">Leading English Language Courses in Your City</p>
-    <a href="#" class="btn btn-warning btn-lg mt-4">Join Us</a>
-</div>
-
-<!-- About Us Section -->
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>About Us</h2>
-            <p>At Zabansara Rey, we provide top-notch English language learning experiences for all age groups. Join us to enhance your English skills with our expert tutors.</p>
-        </div>
-        <div class="col-md-6">
-            <!-- Uncomment and use if you have an image -->
-{#            <!-- <img src="{% static 'images/about.jpg' %}" class="img-fluid rounded" alt="About Us"> -->#}
+<section class="hero-section py-5 text-center text-lg-start bg-primary text-white">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1 class="display-4 fw-bold">Empower Language Learning at Zabansara</h1>
+                <p class="lead mt-3">Manage classes, track assignments, and monitor student progress from a single, powerful dashboard.</p>
+                <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+                    <a href="{% url 'login' %}" class="btn btn-light btn-lg px-4">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-outline-light btn-lg px-4">Student Register</a>
+                    <a href="{% url 'dashboard:teacher_signup' %}" class="btn btn-warning btn-lg px-4 text-dark">Teacher Sign Up</a>
+                </div>
+            </div>
+            <div class="col-lg-5 text-center text-lg-end mt-4 mt-lg-0">
+                <img src="{% static 'images/hero-illustration.png' %}" class="img-fluid rounded shadow" alt="Language Learning" onerror="this.style.display='none'">
+            </div>
         </div>
     </div>
-</div>
+</section>
 
-<!-- Services Section -->
-<div class="services-section py-5" style="background-color: #e0f7fa;">
+<section class="py-5">
     <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
+        <div class="row mb-4 text-center">
+            <div class="col">
+                <h2 class="fw-bold">Why Choose Zabansara?</h2>
+                <p class="text-muted mt-2">Streamlined tools for teachers, dynamic dashboards for students, and real-time insights for everyone.</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
                     <div class="card-body">
-                        <h3 class="card-title">Course One</h3>
-                        <p class="card-text">Beginner-level English courses for students who want to get started.</p>
+                        <h5 class="card-title">Smart Scheduling</h5>
+                        <p class="card-text text-muted">Create and manage class timetables with automatic reminders for upcoming sessions.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
                     <div class="card-body">
-                        <h3 class="card-title">Course Two</h3>
-                        <p class="card-text">Intermediate English courses aimed at improving fluency and accuracy.</p>
+                        <h5 class="card-title">Assessment Tracking</h5>
+                        <p class="card-text text-muted">Monitor exams and assignments, capture performance, and spot trends at a glance.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
                     <div class="card-body">
-                        <h3 class="card-title">Course Three</h3>
-                        <p class="card-text">Advanced courses for students looking to master English and specialize in various areas.</p>
+                        <h5 class="card-title">Collaborative Growth</h5>
+                        <p class="card-text text-muted">Foster communication between teachers and students with shared goals and detailed progress insights.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="fw-bold">Designed for Language Academies</h2>
+                <p class="text-muted mt-3">Zabansara centralizes class data, exam results, and student achievements in a modern web interface built on Django and Bootstrap.</p>
+                <ul class="list-unstyled mt-3 text-muted">
+                    <li class="mb-2">✔ Role-based dashboards for teachers and students</li>
+                    <li class="mb-2">✔ Comprehensive student records with GPA insights</li>
+                    <li class="mb-2">✔ Simple workflows for exams, assignments, and schedules</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 text-center mt-4 mt-lg-0">
+                <img src="{% static 'images/dashboard-preview.png' %}" class="img-fluid rounded shadow-sm" alt="Dashboard preview" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

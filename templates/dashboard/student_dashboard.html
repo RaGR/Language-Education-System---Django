@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>داشبورد دانش‌آموز</h2>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">معدل کل</h6>
+                    <p class="display-6 fw-bold mb-0">{{ average_gpa|default:"-" }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">دوره‌های ثبت شده</h6>
+                    <p class="display-6 fw-bold mb-0">{{ courses|length }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">تکالیف باز</h6>
+                    <p class="display-6 fw-bold mb-0">{{ assignments|length }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">آزمون‌های پیشِ رو</div>
+                <div class="card-body">
+                    {% if upcoming_exams %}
+                        <ul class="list-group list-group-flush">
+                            {% for exam in upcoming_exams %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        {{ exam.title }} - {{ exam.course.name }}
+                                    </span>
+                                    <span class="badge bg-secondary">{{ exam.date }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted mb-0">آزمون آتی ثبت نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header bg-warning text-dark">تکالیف در انتظار</div>
+                <div class="card-body">
+                    {% if assignments %}
+                        <ul class="list-group list-group-flush">
+                            {% for assignment in assignments %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        {{ assignment.title }} - {{ assignment.course.name }}
+                                    </span>
+                                    <span class="badge bg-secondary">{{ assignment.due_date }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted mb-0">تکلیف جدیدی ثبت نشده است.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">برنامه کلاس‌ها</div>
+        <div class="card-body">
+            {% if schedules %}
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>دوره</th>
+                                <th>روز</th>
+                                <th>ساعت شروع</th>
+                                <th>ساعت پایان</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for schedule in schedules %}
+                                <tr>
+                                    <td>{{ schedule.course.name }}</td>
+                                    <td>{{ schedule.get_day_display }}</td>
+                                    <td>{{ schedule.start_time }}</td>
+                                    <td>{{ schedule.end_time }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted mb-0">برنامه‌ای ثبت نشده است.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-secondary text-white">دوره‌های من</div>
+        <div class="card-body">
+            {% if courses %}
+                {% for course in courses %}
+                    <span class="badge bg-dark fs-6 m-1">{{ course.name }}</span>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted mb-0">دوره‌ای ثبت نشده است.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

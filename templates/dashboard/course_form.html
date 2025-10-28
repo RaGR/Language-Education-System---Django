@@ -1,18 +1,15 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends "base.html" %}
 
-{% block title %}Student Sign Up{% endblock %}
+{% block title %}Edit Course{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'register/register_styles.css' %}">
-
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <div class="card shadow-sm border-0">
                 <div class="card-body p-4">
-                    <h2 class="text-center mb-4">ثبت‌نام دانش‌آموز</h2>
-                    <form method="post" novalidate>
+                    <h2 class="text-center mb-4">ویرایش دوره</h2>
+                    <form method="post">
                         {% csrf_token %}
                         {% if form.non_field_errors %}
                             <div class="alert alert-danger">
@@ -25,14 +22,18 @@
                             <div class="mb-3">
                                 <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 {{ field }}
-                                {% if field.errors %}
-                                    {% for error in field.errors %}
-                                        <div class="text-danger small mt-1">{{ error }}</div>
-                                    {% endfor %}
+                                {% if field.help_text %}
+                                    <div class="form-text">{{ field.help_text }}</div>
                                 {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="text-danger small mt-1">{{ error }}</div>
+                                {% endfor %}
                             </div>
                         {% endfor %}
-                        <button type="submit" class="btn btn-primary w-100">ثبت نام</button>
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'dashboard:courses' %}" class="btn btn-outline-secondary">بازگشت</a>
+                            <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+                        </div>
                     </form>
                 </div>
             </div>

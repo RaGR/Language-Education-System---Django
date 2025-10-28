@@ -11,8 +11,8 @@ class SubjectAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ("name", "subject")
-    list_filter = ("subject",)
+    list_display = ("name", "subject", "created_by")
+    list_filter = ("subject", "created_by")
     search_fields = ("name",)
 
 
@@ -26,7 +26,8 @@ class StudentAdmin(admin.ModelAdmin):
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ("username", "first_name", "last_name", "email")
+    list_display = ("username", "first_name", "last_name", "email", "age", "gender", "gpa")
+    list_filter = ("gender", "subjects")
     search_fields = ("username", "first_name", "last_name", "email")
     filter_horizontal = ("subjects", "assigned_students")
 
