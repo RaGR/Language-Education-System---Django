@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/irantyper/iran-yekan-font@1.0.1/dist/fontiran.css">
+    <title>پنل مدیریت</title>
+    <style>
+        body {
+            font-family: 'Iran Yekan', sans-serif;
+            direction: rtl;
+            text-align: right;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+
+        .header {
+            font-weight: bold; /* بولد کردن عنوان پنل */
+            margin-bottom: 20px; /* فاصله از پایین */
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px; /* فاصله بین عنوان و کارت‌ها */
+        }
+
+        .card {
+            margin: 10px;
+            flex: 1 1 30%;
+            border-radius: 15px; /* گوشه‌های گرد */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* سایه مدرن */
+            transition: transform 0.3s; /* انیمیشن ترنسفورم */
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* افکت شناوری */
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .card-icon {
+            margin-left: 10px;
+            color: #007bff; /* رنگ آیکون */
+        }
+
+        .card-body {
+            text-align: justify; /* متن جاستیفای شده */
+        }
+
+        .sample-data {
+            font-size: 0.9em; /* سایز متن نمونه */
+            color: #666; /* رنگ متن نمونه */
+        }
+
+        .footer {
+            position: relative;
+            height: 200px;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: radial-gradient(circle at center, #007bff, transparent);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="header">پنل مدیریت دانش‌آموزان</h2>
+        <div class="card-container">
+            <!-- کارت برای آزمون‌ها -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">آزمون‌ها <i class="fas fa-pen card-icon"></i></h5>
+                    <p class="card-text">لیستی از آزمون‌های آینده و گذشته.</p>
+                    <div class="sample-data">آزمون ریاضی: ۲۵ مهر | آزمون فیزیک: ۱۱ آبان</div>
+                    <a href="#" class="btn btn-primary">مدیریت آزمون‌ها</a>
+                </div>
+            </div>
+
+            <!-- کارت برای تکالیف -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">تکالیف <i class="fas fa-book card-icon"></i></h5>
+                    <p class="card-text">مشاهده و اضافه‌کردن تکالیف.</p>
+                    <div class="sample-data">تکلیف شیمی: ۳۰ مهر | تکلیف ادبیات: ۴ آبان</div>
+                    <a href="#" class="btn btn-primary">مدیریت تکالیف</a>
+                </div>
+            </div>
+
+            <!-- کارت برای خلاصه اطلاعات دانشجویان -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">خلاصه اطلاعات دانشجویان <i class="fas fa-user-graduate card-icon"></i></h5>
+                    <p class="card-text">دیدن مقیاس‌های مختلف دانشجویان.</p>
+                    <div class="sample-data">نام: علی | معدل: ۱۸.۵</div>
+                    <a href="#" class="btn btn-primary">مدیریت اطلاعات</a>
+                </div>
+            </div>
+
+            <!-- کارت برای کلاس‌های پیش رو -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">کلاس‌های پیش رو <i class="fas fa-chalkboard-teacher card-icon"></i></h5>
+                    <p class="card-text">زمان‌های کلاس‌های در آینده.</p>
+                    <div class="sample-data">کلاس ریاضی: دوشنبه | کلاس فیزیک: چهارشنبه</div>
+                    <a href="#" class="btn btn-primary">مدیریت کلاس‌ها</a>
+                </div>
+            </div>
+
+            <!-- کارت برای طراحی آزمون -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">طراحی آزمون <i class="fas fa-edit card-icon"></i></h5>
+                    <p class="card-text">ایجاد و مدیریت آزمون‌ها.</p>
+                    <div class="sample-data">طراحی آزمون جدید: ۱ آذر</div>
+                    <a href="#" class="btn btn-primary">طراحی آزمون</a>
+                </div>
+            </div>
+
+            <!-- کارت برای ویرایش اطلاعات -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">ویرایش اطلاعات <i class="fas fa-pencil-alt card-icon"></i></h5>
+                    <p class="card-text">ویرایش اطلاعات دانش‌آموزان.</p>
+                    <div class="sample-data">ویرایش اطلاعات علی و مهدی</div>
+                    <a href="#" class="btn btn-primary">ویرایش اطلاعات</a>
+                </div>
+            </div>
+
+            <!-- کارت برای افزودن تکالیف -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">افزودن تکالیف <i class="fas fa-plus card-icon"></i></h5>
+                    <p class="card-text">اضافه کردن تکالیف جدید به سیستم.</p>
+                    <div class="sample-data">افزودن تکلیف جدید برای کلاس پنجم</div>
+                    <a href="#" class="btn btn-primary">اضافه کردن تکالیف</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer"></div> <!-- منحنی دایره‌ای در انتهای صفحه -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

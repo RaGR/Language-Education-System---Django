@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/irantyper/iran-yekan-font@1.0.1/dist/fontiran.css">
+    <style>
+        body {
+            font-family: 'Iran Yekan', sans-serif;
+            direction: rtl;
+            text-align: right;
+            background-color: #f8f9fa;
+        }
+
+        .dashboard-header {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .dashboard-card {
+            margin: 10px;
+            flex: 1 1 30%;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-card-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .dashboard-card-icon {
+            margin-left: 10px;
+            color: #007bff;
+        }
+
+        .dashboard-card-body {
+            text-align: justify;
+        }
+
+        .dashboard-sample-data {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .dashboard-footer {
+            position: relative;
+            height: 200px;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .dashboard-footer::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: radial-gradient(circle at center, #007bff, transparent);
+            border-radius: 50%;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="dashboard-header">پنل مدیریت دانش‌آموزان</h2>
+    <div class="dashboard-card-container">
+        <div class="card dashboard-card">
+            <div class="card-body dashboard-card-body">
+                <h5 class="dashboard-card-title">آزمون‌ها <i class="fas fa-pen dashboard-card-icon"></i></h5>
+                <p class="card-text">لیستی از آزمون‌های آینده و گذشته.</p>
+                <div class="dashboard-sample-data">آزمون ریاضی: ۲۵ مهر | آزمون فیزیک: ۱۱ آبان</div>
+                <a href="#" class="btn btn-primary mt-3">مدیریت آزمون‌ها</a>
+            </div>
+        </div>
+
+        <div class="card dashboard-card">
+            <div class="card-body dashboard-card-body">
+                <h5 class="dashboard-card-title">تکالیف <i class="fas fa-book dashboard-card-icon"></i></h5>
+                <p class="card-text">مشاهده و اضافه‌کردن تکالیف.</p>
+                <div class="dashboard-sample-data">تکلیف شیمی: ۳۰ مهر | تکلیف ادبیات: ۴ آبان</div>
+                <a href="#" class="btn btn-primary mt-3">مدیریت تکالیف</a>
+            </div>
+        </div>
+
+        <div class="card dashboard-card">
+            <div class="card-body dashboard-card-body">
+                <h5 class="dashboard-card-title">خلاصه اطلاعات دانشجویان <i class="fas fa-user-graduate dashboard-card-icon"></i></h5>
+                <p class="card-text">دیدن مقیاس‌های مختلف دانشجویان.</p>
+                <div class="dashboard-sample-data">نام: علی | معدل: ۱۸.۵</div>
+                <a href="#" class="btn btn-primary mt-3">مدیریت اطلاعات</a>
+            </div>
+        </div>
+
+        <div class="card dashboard-card">
+            <div class="card-body dashboard-card-body">
+                <h5 class="dashboard-card-title">کلاس‌های پیش رو <i class="fas fa-chalkboard-teacher dashboard-card-icon"></i></h5>
+                <p class="card-text">زمان‌های کلاس‌های در آینده.</p>
+                <div class="dashboard-sample-data">کلاس ریاضی: دوشنبه | کلاس فیزیک: چهارشنبه</div>
+                <a href="#" class="btn btn-primary mt-3">مدیریت کلاس‌ها</a>
+            </div>
+        </div>
+
+        <div class="card dashboard-card">
+            <div class="card-body dashboard-card-body">
+                <h5 class="dashboard-card-title">طراحی آزمون <i class="fas fa-edit dashboard-card-icon"></i></h5>
+                <p class="card-text">ایجاد و مدیریت آزمون‌ها.</p>
+                <div class="dashboard-sample-data">طراحی آزمون جدید: ۱ آذر</div>
+                <a href="#" class="btn btn-primary mt-3">طراحی آزمون</a>
+            </div>
+        </div>
+
+        <div class="card dashboard-card">
+            <div class="card-body dashboard-card-body">
+                <h5 class="dashboard-card-title">ویرایش اطلاعات <i class="fas fa-pencil-alt dashboard-card-icon"></i></h5>
+                <p class="card-text">ویرایش اطلاعات دانش‌آموزان.</p>
+                <div class="dashboard-sample-data">ویرایش اطلاعات علی و مهدی</div>
+                <a href="#" class="btn btn-primary mt-3">ویرایش اطلاعات</a>
+            </div>
+        </div>
+
+        <div class="card dashboard-card">
+            <div class="card-body dashboard-card-body">
+                <h5 class="dashboard-card-title">افزودن تکالیف <i class="fas fa-plus dashboard-card-icon"></i></h5>
+                <p class="card-text">اضافه کردن تکالیف جدید به سیستم.</p>
+                <div class="dashboard-sample-data">افزودن تکلیف جدید برای کلاس پنجم</div>
+                <a href="#" class="btn btn-primary mt-3">اضافه کردن تکالیف</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-footer"></div>
+{% endblock %}
